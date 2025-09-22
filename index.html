@@ -1,311 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TaxSolution</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    /* Reset & base */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      background: #f8f9fa;
-      color: #333;
-      scroll-behavior: smooth;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaxSolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Reset & base */
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; height:100%; font-family:'Inter',sans-serif; scroll-behavior:smooth; }
+body { background:#f8f9fa; color:#333; }
 
-    /* Header */
-    header {
-      background: #4e54c8;
-      color: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      padding: 1rem 2rem;
-    }
+/* Header */
+header {
+  background:#4e54c8;
+  color:#fff;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  width:100%;
+  padding:1.2rem 2rem;
+  transition: padding 0.3s;
+}
+header.shrink { padding:0.6rem 2rem; }
+.header-container { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+header h1 { font-size:1.5rem; transition: font-size 0.3s; }
+header.shrink h1 { font-size:1.2rem; }
 
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+/* Navigation */
+nav { display:flex; align-items:center; flex-wrap:wrap; }
+.nav-links { display:flex; gap:15px; }
+.nav-links a { color:white; text-decoration:none; font-weight:600; transition: color 0.3s; }
+.nav-links a:hover, .nav-links a.active { color:#ffd700; }
 
-    header h1 {
-      font-size: 1.5rem;
-    }
+/* Hamburger menu */
+.hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; margin-left:15px; }
+.hamburger div { width:25px; height:3px; background-color:white; border-radius:2px; }
 
-    nav {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+/* Banner */
+.banner { width:100%; height:auto; max-height:500px; object-fit:cover; margin-bottom:2rem; border-radius:10px; }
+.hero-text { text-align:center; margin-top:1rem; opacity:0; transform:translateY(30px); transition: all 0.8s ease; }
 
-    .nav-links {
-      display: flex;
-      gap: 15px;
-    }
+/* Sections */
+section { padding:4rem 2rem; max-width:1200px; margin:auto; width:100%; }
+section h2 { font-size:2rem; margin-bottom:1rem; color:#4e54c8; text-align:center; opacity:0; transform:translateY(30px); transition: all 0.8s ease; }
+section p { margin-bottom:1rem; text-align:center; opacity:0; transform:translateY(30px); transition: all 0.8s ease; }
 
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
+/* Services grid */
+.services { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:2rem; }
+.service-card {
+  background:#fff; padding:1.5rem; border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  transition: transform 0.3s, box-shadow 0.3s, opacity 0.8s ease, transform 0.8s ease;
+  opacity:0; transform:translateY(30px);
+}
+.service-card:hover { transform:translateY(-8px) scale(1.03); box-shadow:0 8px 20px rgba(0,0,0,0.1); }
 
-    .nav-links a:hover {
-      color: #ffd700;
-    }
+/* Contact form */
+form { display:grid; gap:1rem; max-width:500px; margin:1.5rem auto 0; opacity:0; transform:translateY(30px); transition: all 0.8s ease; }
+input, textarea { padding:0.8rem; border:1px solid #ccc; border-radius:8px; font-size:1rem; width:100%; }
+textarea { resize:none; height:120px; }
+button.submit-btn { background:#4e54c8; color:white; border:none; padding:0.8rem 1.5rem; border-radius:8px; cursor:pointer; font-weight:600; transition: background 0.3s, transform 0.2s; }
+button.submit-btn:hover { background:#8f94fb; transform:scale(1.05); }
 
-    /* Hamburger menu */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
-    }
+/* Footer */
+footer { text-align:center; background:#333; color:#fff; padding:1.5rem; margin-top:2rem; }
+footer .social-icons {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+footer .social-icons a img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+footer .social-icons a img:hover {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
 
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      border-radius: 2px;
-    }
+/* Floating WhatsApp */
+#whatsapp-btn { position:fixed; bottom:30px; right:30px; background:#25D366; width:60px; height:60px; border-radius:50%; display:flex; justify-content:center; align-items:center; box-shadow:0 4px 10px rgba(0,0,0,0.2); cursor:pointer; z-index:1000; transition:transform 0.3s; }
+#whatsapp-btn:hover { transform:scale(1.1); }
+#whatsapp-btn img { width:35px; height:35px; }
 
-    /* Banner */
-    .banner {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-    }
+/* Back-to-top */
+#back-to-top { position:fixed; bottom:100px; right:30px; background:#4e54c8; color:white; padding:10px 15px; border-radius:50px; cursor:pointer; display:none; z-index:1000; font-weight:600; transition:opacity 0.3s; }
 
-    /* Sections */
-    section {
-      padding: 4rem 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #4e54c8;
-      text-align: center;
-    }
-
-    section p {
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    /* Services grid */
-    .services {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .service-card {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    }
-
-    /* Contact form */
-    form {
-      display: grid;
-      gap: 1rem;
-      max-width: 500px;
-      margin: 1.5rem auto 0;
-    }
-
-    input, textarea {
-      padding: 0.8rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      width: 100%;
-    }
-
-    textarea {
-      resize: none;
-      height: 120px;
-    }
-
-    button {
-      background: #4e54c8;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s, transform 0.2s;
-    }
-
-    button:hover {
-      background: #8f94fb;
-      transform: scale(1.05);
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      background: #333;
-      color: #fff;
-      padding: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .services {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .header-container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .hamburger {
-        display: flex;
-        margin-top: 10px;
-      }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        margin-top: 10px;
-      }
-      .nav-links.active {
-        display: flex;
-      }
-      nav a {
-        margin-left: 0;
-        margin-bottom: 10px;
-      }
-      .services {
-        grid-template-columns: 1fr;
-      }
-      section {
-        padding: 2rem 1rem;
-      }
-      section h2 {
-        font-size: 1.8rem;
-      }
-    }
-  </style>
+/* Responsive */
+@media (max-width:1024px){ .services{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:768px){
+  .header-container{flex-direction:column;align-items:flex-start;}
+  .hamburger{display:flex;margin-top:10px;}
+  .nav-links{display:flex;flex-direction:column;width:100%;max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+  .nav-links.active{max-height:500px;}
+  nav a{margin-left:0;margin-bottom:10px;}
+  .services{grid-template-columns:1fr;}
+  section{padding:2rem 1rem;}
+  section h2{font-size:1.8rem;}
+}
+</style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <h1>TaxSolution</h1>
-      <nav>
-        <div class="hamburger" id="hamburger">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="nav-links" id="nav-links">
-          <a href="#home">Home</a>
-          <a href="#about">About Us</a>
-          <a href="#services">Services</a>
-          <a href="#contact">Contact Us</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+<!-- Header -->
+<header id="header">
+  <div class="header-container">
+    <h1>TaxSolution</h1>
+    <nav>
+      <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+      <div class="nav-links" id="nav-links">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About Us</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#contact" class="nav-link">Contact Us</a>
+      </div>
+    </nav>
+  </div>
+</header>
 
-  <!-- Home -->
-  <section id="home">
-    <img src="banner.jpg" alt="Website Banner" class="banner">
+<!-- Home -->
+<section id="home">
+  <img src="banner.jpg" alt="Website Banner" class="banner">
+  <div class="hero-text"> 
     <h2>Welcome to TaxSolution</h2>
     <p>Your trusted partner for simplified tax filing, GST compliance, and expert financial guidance.</p>
-  </section>
+  </div>
+</section>
 
-  <!-- About -->
-  <section id="about">
-    <h2>About Us</h2>
-    <p>At TaxSolution, we provide hassle-free tax and financial services designed to make your life easier. Our mission is to deliver professional solutions with transparency and trust.</p>
-  </section>
+<!-- About -->
+<section id="about">
+  <h2>About Us</h2>
+  <p>At TaxSolution, we provide hassle-free tax and financial services designed to make your life easier. Our mission is to deliver professional solutions with transparency and trust.</p>
+</section>
 
-  <!-- Services -->
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="services">
-      <div class="service-card"> 
-        <h3>Expert Assisted</h3>
-        <p>Price starts at ₹499 / Year</p>
-        <p>Get a Tax Expert to work on your taxes and receive year-round support.</p>
-      </div>
-      <div class="service-card">
-        <h3>Income Tax Notice</h3>
-        <p>Price starts at ₹1499 / Year</p>
-        <p>A Tax Expert to handle your Tax Notices.</p>
-      </div>
-      <div class="service-card">
-        <h3>Tax Planning</h3>
-        <p>Price starts at ₹1999 / Year</p>
-        <p>Optimize your investment and Tax avenues with Expert guidance.</p>
-      </div>
-      <div class="service-card">
-        <h3>US Tax</h3>
-        <p>Price starts at ₹8600 / Year</p>
-        <p>Get an expert to file your US taxes with year-round advice.</p>
-      </div>
-    </div>
-  </section>
+<!-- Services -->
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="service-card"><h3>Expert Assisted</h3><p>₹499 / Year</p><p>Get a Tax Expert to work on your taxes and receive year-round support.</p></div>
+    <div class="service-card"><h3>Income Tax Notice</h3><p>₹1499 / Year</p><p>A Tax Expert to handle your Tax Notices.</p></div>
+    <div class="service-card"><h3>Tax Planning</h3><p>₹1999 / Year</p><p>Optimize your investment and Tax avenues with Expert guidance.</p></div>
+    <div class="service-card"><h3>US Tax</h3><p>₹8600 / Year</p><p>Get an expert to file your US taxes with year-round advice.</p></div>
+  </div>
+</section>
 
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p><strong>India:</strong></p>
-    <p><strong>Phone:</strong> <a href="tel:+917798170838">+91 7798170838</a></p>
-    <p>We’d love to hear from you! Fill out the form below and we’ll get in touch soon.</p>
-    
-    <form action="https://formspree.io/f/xnngazkb" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
+<!-- Contact -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p><strong>India:</strong></p>
+  <p><strong>Phone:</strong> <a href="tel:+917798170838">+91 7798170838</a></p>
+  <p>We’d love to hear from you! Fill out the form below and we’ll get in touch soon.</p>
+  <form action="https://formspree.io/f/xnngazkb" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit" class="submit-btn">Send Message</button>
+  </form>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 TaxSolution. All rights reserved.</p>
-  </footer>
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 TaxSolution. All rights reserved.</p>
+  <div class="social-icons">
+    <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+    <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter"></a>
+    <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"></a>
+    <a href="#" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+  </div>
+</footer>
 
-  <!-- Hamburger Script -->
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
+<!-- Floating WhatsApp -->
+<div id="whatsapp-btn" onclick="window.open('https://wa.me/917798170838','_blank')">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</div>
 
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-  </script>
+<!-- Back-to-top -->
+<div id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+// Hamburger toggle
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('nav-links');
+hamburger.addEventListener('click',()=>navLinks.classList.toggle('active'));
+
+// Shrinking header
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>{ if(window.scrollY>50) header.classList.add('shrink'); else header.classList.remove('shrink'); });
+
+// Highlight nav links
+const sections=document.querySelectorAll('section');
+const navItems=document.querySelectorAll('.nav-link');
+window.addEventListener('scroll',()=>{ 
+  let current=''; 
+  sections.forEach(section=>{ if(scrollY >= section.offsetTop-100) current=section.getAttribute('id'); }); 
+  navItems.forEach(a=>{ a.classList.remove('active'); if(a.getAttribute('href')=='#'+current) a.classList.add('active'); }); 
+});
+
+// Back-to-top visibility
+const backTop=document.getElementById('back-to-top');
+window.addEventListener('scroll',()=>{ backTop.style.display=(window.scrollY>200)?'block':'none'; });
+
+// Scroll animations
+const scrollElements = document.querySelectorAll('.hero-text, section h2, section p, .service-card, form');
+const elementInView = (el, offset=100) => { return el.getBoundingClientRect().top <= (window.innerHeight - offset); };
+const displayScrollElement = (el) => { el.style.opacity=1; el.style.transform='translateY(0)'; };
+const handleScrollAnimation = () => { scrollElements.forEach(el => { if(elementInView(el,100)) displayScrollElement(el); }); };
+window.addEventListener('scroll', handleScrollAnimation);
+window.addEventListener('load', handleScrollAnimation);
+</script>
 
 </body>
 </html>
