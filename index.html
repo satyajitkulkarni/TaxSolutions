@@ -59,9 +59,9 @@
 
     /* Services grid */
     .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
     }
     .service-card {
       background: #fff;
@@ -74,6 +74,9 @@
       transform: translateY(-5px);
       box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     }
+    .center-content {
+    text-align: center;
+}
 
     /* Contact form */
     form {
@@ -161,17 +164,37 @@
   <section id="services">
     <h2>Our Services</h2>
     <div class="services">
-      <div class="service-card">
-        <h3>Income Tax Filing</h3>
-        <p>File your ITR online quickly and accurately with expert assistance.</p>
+      <div class="service-card"> 
+        <div class="center-content">
+        <h3>Expert Assisted</h3>
+        <p>Price starts at</p>
+        <p>₹499 / Year</p>
+        <p>Get a Tax Expert to work on your taxes and receive year-round support.</p>
+        </div>
       </div>
       <div class="service-card">
-        <h3>GST Services</h3>
-        <p>Manage your GST registration and compliance with ease.</p>
+        <div class="center-content">
+        <h3>Incom Tax Notice</h3>
+        <p>Price starts at</p>
+        <p>₹1499 / Year</p>
+        <p>A Tax Expert to handle your Tax Notices.</p>
+        </div>
       </div>
       <div class="service-card">
-        <h3>Tax Consultation</h3>
-        <p>Get personalized tax advice from our certified professionals.</p>
+        <div class="center-content">
+        <h3>Tax Planning</h3>
+        <p>Price starts at</p>
+        <p>₹1999 / Year</p>
+        <p>Optimize your investment and Tax avenues with Expert guidance.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="center-content">
+        <h3>US Tax</h3>
+        <p>Price starts at</p>
+        <p>₹8600 / Year</p>
+        <p>Get an expert to file your US taxes with year-round advice.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -180,6 +203,8 @@
   <!-- Contact -->
 <section id="contact">
   <h2>Contact Us</h2>
+  <p> <strong>India : </strong></p>
+  <p><strong>Phone:</strong> <a href="tel:+91 7798170838">+91 7798170838</a></p>
   <p>We’d love to hear from you! Fill out the form below and we’ll get in touch soon.</p>
   
   <form action="https://formspree.io/f/xnngazkb" method="POST">
